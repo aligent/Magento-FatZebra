@@ -1,0 +1,184 @@
+<?xml version="1.0"?>
+<package>
+    <name>MindArc_FatZebra</name>
+    <version>2.1.1</version>
+    <stability>stable</stability>
+    <license uri="http://opensource.org/licenses/OSL-3.0">OSL v3.0</license>
+    <channel>community</channel>
+    <extends/>
+    <summary>Accept Credit Card Payments quickly and simply with Fat Zebra</summary>
+    <description>Fat Zebra Online Payment Gateway Module&#xD;
+        &#xD;
+        &#xD;
+        The Fat Zebra extension for Magento simplifies the way you take payments for all credit cards allowing you to
+        trade around the clock. Our extension makes running your online store Simple, Secure and Reliable.
+    </description>
+    <notes>This release fixed issues with floating point conversions and client side issues around validation
+        requirements for checkboxes.&#xD;
+        &#xD;
+        In addition to this support for GoMage Lightcheckout has also been added.
+    </notes>
+    <authors>
+        <author>
+            <name>Matthew Savage</name>
+            <user>fatzebra</user>
+            <email>support@fatzebra.com.au</email>
+        </author>
+        <author>
+            <name>Sean Pieres</name>
+            <user>mindarc</user>
+            <email>seanp@mindarc.com.au</email>
+        </author>
+    </authors>
+    <date>2014-12-08</date>
+    <time>13:00:48</time>
+    <contents>
+        <target name="magemedia">
+            <dir name="payments">
+                <file name="AE.png" hash="6618b2807e770477888355c125814e47"/>
+                <file name="DI.png" hash="08f295c0cd71873070faffd474c2ebf0"/>
+                <file name="DIS.png" hash="fe70dd42f08b5fa241722143ea56e014"/>
+                <file name="Fat-Zebra-Certified-small.png" hash="68bd23468e1d66fe62029fd2fa059eb9"/>
+                <file name="JCB.png" hash="7ab40a5e183b15a5984f93ac65d5d765"/>
+                <file name="MC.png" hash="81e6a33da57071995e7687de1e8000d4"/>
+                <file name="VI.png" hash="98fc2e691849e5e18d2ead52b3298467"/>
+                <file name="mindarc.png" hash="09c872e6e97839e43e2d2e4b6f3b10f7"/>
+            </dir>
+        </target>
+        <target name="mage">
+            <dir name="js">
+                <dir name="fatzebra">
+                    <file name="fatzebra.js" hash="8e694fff184a96cf47dbb7911e0df5cd"/>
+                </dir>
+            </dir>
+        </target>
+        <target name="magecommunity">
+            <dir name="MindArc">
+                <dir name="FatZebra">
+                    <dir name="Block">
+                        <dir name="Adminhtml">
+                            <dir name="Sales">
+                                <dir name="Order">
+                                    <file name="Grid.php" hash="44225a01a1e1e55194a7c132ae4dc13c"/>
+                                    <dir name="View">
+                                        <dir name="Tab">
+                                            <file name="Fraud.php" hash="9dcee42431582eff82db97b3be4ae1b1"/>
+                                        </dir>
+                                    </dir>
+                                </dir>
+                            </dir>
+                            <dir name="Widget">
+                                <dir name="Grid">
+                                    <dir name="Column">
+                                        <dir name="Renderer">
+                                            <file name="Fraudresult.php" hash="d9d652317b3a034b0b52b53a9720e198"/>
+                                        </dir>
+                                    </dir>
+                                </dir>
+                            </dir>
+                        </dir>
+                        <file name="Form.php" hash="e63d82a273323015c0b0b2439863339c"/>
+                        <file name="Jsinit.php" hash="3aae98d2a2cac4781e96a102ccfe2ff2"/>
+                    </dir>
+                    <dir name="Helper">
+                        <file name="Data.php" hash="be520e21277ddd35abeef11319b259af"/>
+                    </dir>
+                    <dir name="Model">
+                        <dir name="Adminhtml">
+                            <file name="Comment.php" hash="bde2e451f744cb60398d8fbe74d72ea7"/>
+                            <dir name="Shipping">
+                                <file name="Enabledmethods.php" hash="ba53c9d5addf3952fbed2c8e0455f32a"/>
+                            </dir>
+                        </dir>
+                        <file name="Cardtypes.php" hash="1376e47e915a0b374e505e2323524bae"/>
+                        <file name="Customer.php" hash="f3aae80ff53d63f624883b1ae4402a06"/>
+                        <dir name="Entity">
+                            <file name="Setup.php" hash="dd54e8fcb22ec3b828e64246a250b3e0"/>
+                        </dir>
+                        <file name="Filterfraud.php" hash="47ed142fc827caf20a3030d4cc7a5316"/>
+                        <file name="Fraud.php" hash="ebfc7c40647656d4d9762d5e44482aef"/>
+                        <dir name="Mysql4">
+                            <file name="Fraud.php" hash="ff163c045a95dfaafeed3258a0caaf98"/>
+                        </dir>
+                        <file name="Observer.php" hash="b913cb42094640c7f98893a4b98217da"/>
+                        <file name="Payment.php" hash="c70d10b81af05c7a53521cf1bfdda08a"/>
+                        <dir name="Source">
+                            <file name="Action.php" hash="12512aed4d86e924075ed530a1213b2e"/>
+                        </dir>
+                    </dir>
+                    <dir name="controllers">
+                        <file name="IndexController.php" hash="a86df76a4536a04d5d0fac1c9278bbc2"/>
+                    </dir>
+                    <dir name="etc">
+                        <file name="config.xml" hash="dc25503638ff433289c00dac79377423"/>
+                        <file name="system.xml" hash="21cd5acb2f2d335fe2eb04ac07649f2e"/>
+                    </dir>
+                    <dir name="sql">
+                        <dir name="fatzebra_setup">
+                            <file name="mysql4-install-0.1.1-2.0.5.php" hash="5cd350c0249c3b8627735f8d00069599"/>
+                            <file name="mysql4-upgrade-2.0.5-2.0.6.php" hash="7c8256bb10e9cf1264fabd8ecd7c8ef4"/>
+                        </dir>
+                    </dir>
+                </dir>
+            </dir>
+        </target>
+        <target name="magedesign">
+            <dir name="adminhtml">
+                <dir name="default">
+                    <dir name="default">
+                        <dir name="layout">
+                            <file name="fatzebra.xml" hash="0514cd22fc526c452773a74974d69992"/>
+                        </dir>
+                        <dir name="template">
+                            <dir name="mindarc">
+                                <dir name="fatzebra">
+                                    <file name="form.phtml" hash="6BAB992836F64FED22503B1A4DA03CDB"/>
+                                    <file name="jsinit.phtml" hash="5361a5dc068223c96b1a1d78f5819aea"/>
+                                    <file name="tab.phtml" hash="98f37d8aeaa98e67fb2a5889fa961f61"/>
+                                </dir>
+                            </dir>
+                        </dir>
+                    </dir>
+                </dir>
+            </dir>
+            <dir name="frontend">
+                <dir name="base">
+                    <dir name="default">
+                        <dir name="layout">
+                            <file name="fatzebra.xml" hash="b53fda9a617066cc8e48a66ca076e55e"/>
+                        </dir>
+                        <dir name="template">
+                            <dir name="mindarc">
+                                <dir name="fatzebra">
+                                    <file name="empty.phtml" hash="414ab6b84388449e8d1c62fd98bca2a4"/>
+                                    <file name="form.phtml" hash="aac2c151600696787b59190ec4728ba5"/>
+                                    <file name="info.phtml" hash="fbde0f91701a994791d788f6099784eb"/>
+                                </dir>
+                            </dir>
+                        </dir>
+                    </dir>
+                </dir>
+            </dir>
+        </target>
+        <target name="mageetc">
+            <dir name="modules">
+                <file name="MindArc_Fatzebra.xml" hash="8f5541d5893da02862a3a0ca4e6a6d9c"/>
+            </dir>
+        </target>
+    </contents>
+    <compatible/>
+    <dependencies>
+        <required>
+            <php>
+                <min>5.3.0</min>
+                <max>6.0.0</max>
+            </php>
+            <package>
+                <name>Mage_Payment</name>
+                <channel>core</channel>
+                <min></min>
+                <max></max>
+            </package>
+        </required>
+    </dependencies>
+</package>

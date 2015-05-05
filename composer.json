@@ -1,0 +1,10 @@
+{
+  "name":"fatzebra/magento-fatzebra",
+  "type":"magento-module",
+  "homepage":"https://github.com/aligent/Magento-FatZebra",
+  "description":"Magento FatZebra payment module.",
+  "require":{
+    "magento-hackathon/magento-composer-installer":"*"
+  }
+}
+

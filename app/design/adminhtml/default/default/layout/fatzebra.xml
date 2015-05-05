@@ -1,0 +1,16 @@
+<layout>
+	<adminhtml_sales_order_view>
+		<reference name="sales_order_tabs">
+			<action method="addTab">
+				<name>tab_fatzebrafraud</name>
+				<block>fatzebra/adminhtml_sales_order_view_tab_fraud</block>
+			</action>
+		</reference>
+	</adminhtml_sales_order_view>
+	<adminhtml_system_config_edit>
+        <reference name="content">
+            <block type="fatzebra/jsinit" name="fatzebra_jsinit"  template="mindarc/fatzebra/jsinit.phtml"></block>
+        </reference>
+    </adminhtml_system_config_edit>
+	
+</layout>

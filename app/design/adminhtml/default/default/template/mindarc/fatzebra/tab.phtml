@@ -1,0 +1,44 @@
+<?php
+//	$res = $this->getFraudResult();
+//	$customer = $this->getCustomer();
+?>
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-products">Retail Decisions Fraud Detected</h4>
+    </div>
+</div>
+<div class="fieldset">
+    <?php
+    $order = $this->getOrder();
+    $model = Mage::getModel('fatzebra/fraud')->loadByOrderId($order->getId());
+    if (!$model->getId()) {
+        $fraud_time_detected = "---";
+        $fraud_result = "---";
+        $fraud_message_title = "---";
+        $fraud_message_detail = "";
+    } else {
+        $fraud_time_detected = Mage::helper('core')->formatTime($model->getCreatedAt(), $format = 'medium', $showDate = true);
+        $fraud_result = $model->getFraudResult();
+        $fraud_message_title = $model->getFraudMessagesTitle();
+        $fraud_message_detail = $model->getFraudMessagesDetail();
+    }
+  
+    ?>
+    <table cellspacing="0" class="form-list">
+        <tbody>
+            <tr>
+                <td class="label"><label>Fraud Detected Date:</label></td>
+                <td class="value"><strong><?php echo $fraud_time_detected; ?></strong></td>
+            </tr>
+            <tr>
+                <td class="label"><label>Fraud Result:</label></td>
+                <td class="value"><strong><?php echo $fraud_result; ?></strong></td>
+            </tr>
+            <tr>
+                <td class="label"><label>Fraud Message:</label></td>
+                <td class="value"><strong><?php echo $fraud_message_title; ?></strong><br><?php echo $fraud_message_detail; ?></td>
+            </tr>
+        </tbody>
+
+    </table>
+</div>

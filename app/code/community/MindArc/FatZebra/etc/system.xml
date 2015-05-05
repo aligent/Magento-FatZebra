@@ -1,0 +1,222 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <payment>
+            <groups>
+                <fatzebra translate="label" module="paygate">
+                    <label>Fat Zebra</label>
+                    <sort_order>670</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+
+                        <sandbox translate="label">
+                            <label>Sandbox Mode</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sandbox>
+                        <payment_action translate="label comment">
+                            <label>Payment Action</label>
+                            <comment>
+                                <![CDATA[
+                                    If Authorise & Capture, invoice created automatically.
+                                ]]>
+                            </comment>
+                            <frontend_type>select</frontend_type>                                   
+                            <source_model>fatzebra/source_action</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store> 
+                        </payment_action>
+                        <testmode translate="label">
+                            <label>Test Mode</label>
+                            <comment>For testing in a non-sandbox environment</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </testmode>
+                        <show_logo translate="label">
+                            <label>Show Fat Zebra Logo</label>
+                            <comment>Optional, but we will love you forever if you do</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </show_logo>
+
+                        <cctypes translate="label">
+                            <label>Show Card Logos</label>
+                            <comment>Select which card types you wish to display</comment>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>adminhtml/system_config_source_payment_cctype</source_model>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </cctypes>
+
+                        <username translate="label">
+                            <label>Username</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </username>
+
+                        <token translate="label">
+                            <label>Token</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </token>
+
+                        <direct_post translate="label">
+                            <label>Direct Post Tokenization</label>
+                            <comment>Enable this to transmit the credit card data directly from the customer's browser to the Gateway. This helps reduce the PCI-DSS scope for your website.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </direct_post>
+                        <can_save translate="label">
+                            <label>Customer can save Credit Card</label>
+                            <comment>Requires Direct post to be enabled</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends><direct_post>1</direct_post></depends>
+                        </can_save>
+                        <shared_secret translate="label">
+                            <label>Shared Secret</label>
+                            <comment>Required for Direct Post Tokenization</comment>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><direct_post>1</direct_post></depends>
+                        </shared_secret>
+
+                        <order_status translate="label">
+                            <label>New order status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status_processing</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </order_status>
+
+                        <title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+
+                        <fraud_detected translate="label">
+                            <label>Retail Decisions Fraud Detection</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>98</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </fraud_detected>
+
+                        <fraud_ship_lowcost translate="label">
+                            <label>Fraud Shipping Map - Low Cost</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>fatzebra/adminhtml_shipping_enabledmethods</source_model>
+                            <sort_order>99</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><fraud_detected>1</fraud_detected></depends>
+                        </fraud_ship_lowcost>
+                        <fraud_ship_sameday translate="label">
+                            <label>Fraud Shipping Map - Same Day</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>fatzebra/adminhtml_shipping_enabledmethods</source_model>
+                            <sort_order>99</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><fraud_detected>1</fraud_detected></depends>
+                        </fraud_ship_sameday>
+                        <fraud_ship_overnight translate="label">
+                            <label>Fraud Shipping Map - Overnight</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>fatzebra/adminhtml_shipping_enabledmethods</source_model>
+                            <sort_order>99</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><fraud_detected>1</fraud_detected></depends>
+                        </fraud_ship_overnight>
+                        <fraud_ship_express translate="label">
+                            <label>Fraud Shipping Map - Express</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>fatzebra/adminhtml_shipping_enabledmethods</source_model>
+                            <sort_order>99</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><fraud_detected>1</fraud_detected></depends>
+                        </fraud_ship_express>
+                        <fraud_ship_international translate="label">
+                            <label>Fraud Shipping Map - International</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>fatzebra/adminhtml_shipping_enabledmethods</source_model>
+                            <sort_order>99</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><fraud_detected>1</fraud_detected></depends>
+                        </fraud_ship_international>
+                        <fraud_ship_pickup translate="label">
+                            <label>Fraud Shipping Map - Pickup</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>fatzebra/adminhtml_shipping_enabledmethods</source_model>
+                            <sort_order>99</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><fraud_detected>1</fraud_detected></depends>
+                        </fraud_ship_pickup>
+                    </fields>
+                </fatzebra>
+            </groups>
+        </payment>
+    </sections>
+</config>

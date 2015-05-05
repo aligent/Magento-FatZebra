@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <onestepcheckout_index_index>
+        <reference name="head">
+            <action method="addJs"><file>fatzebra/fatzebra.js</file></action>
+        </reference>
+    </onestepcheckout_index_index>
+    <checkout_onepage_index>
+        <reference name="head">
+            <action method="addJs"><file>fatzebra/fatzebra.js</file></action>
+        </reference>
+    </checkout_onepage_index>
+    <checkout_multishipping_billing>
+        <reference name="head">
+            <action method="addJs"><file>fatzebra/fatzebra.js</file></action>
+        </reference>
+    </checkout_multishipping_billing>
+    <checkout_cart_index>
+        <reference name="head">
+            <action method="addJs"><file>fatzebra/fatzebra.js</file></action>
+        </reference>
+    </checkout_cart_index>
+    <fatzebra_index_index>
+        <reference name="root">
+            <action method="addJs"><file>fatzebra/fatzebra.js</file></action>
+        </reference>
+    </fatzebra_index_index>
+    <gomage_checkout_onepage_index>
+        <reference name="head">
+            <action method="addJs"><file>fatzebra/fatzebra.js</file></action>
+        </reference>
+    </gomage_checkout_onepage_index>
+</layout>

@@ -3,7 +3,7 @@
 class MindArc_FatZebra_Model_Payment extends Mage_Payment_Model_Method_Cc
 {
 
-    const VERSION = "2.1.1";
+    const VERSION = "2.1.2";
 
     // Fraud Check Data Scrubbing...
     const RE_ANS = "/[^A-Z\d\-_',\.;:\s]*/i";
@@ -23,6 +23,9 @@ class MindArc_FatZebra_Model_Payment extends Mage_Payment_Model_Method_Cc
     protected $_canReviewPayment = true;
     protected $_canSaveCc = false;
     protected $_formBlockType = 'fatzebra/form';
+
+    // Allow partial refund
+    protected $_canRefundInvoicePartial = true;
 
     /**
      * Assign data to info model instance
@@ -159,7 +162,7 @@ class MindArc_FatZebra_Model_Payment extends Mage_Payment_Model_Method_Cc
      */
     private function process_refund($payment, $amount)
     {
-        $amt = round($amount * 100, 2);
+        $amt = round($amount * 100);
         $amt = (int)$amt;
         $payload = array("transaction_id" => $payment->getLastTransId(),
             "amount" => (int)$amt,
@@ -177,7 +180,7 @@ class MindArc_FatZebra_Model_Payment extends Mage_Payment_Model_Method_Cc
      */
     private function process_payment($payment)
     {
-        $amt = round($this->amount * 100, 2);
+        $amt = round($this->amount * 100);
         $amt = (int)$amt;
 
         $info = $this->getInfoInstance();

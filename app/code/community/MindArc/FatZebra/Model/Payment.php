@@ -428,7 +428,7 @@ class MindArc_FatZebra_Model_Payment extends Mage_Payment_Model_Method_Cc
             Mage::throwException(Mage::helper('fatzebra')->__("Gateway Error: %s", $e->getMessage()));
         }
 
-        $responseBody = $response->getRawBody();
+        $responseBody = $response->getBody();
         $response = json_decode($responseBody);
         if (is_null($response)) {
             $response = array("successful" => false,

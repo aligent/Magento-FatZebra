@@ -4,6 +4,6 @@ app/design/adminhtml/default/default/layout/fatzebra.xml app/design/adminhtml/de
 app/design/adminhtml/default/default/template/mindarc/fatzebra/ app/design/adminhtml/default/default/template/mindarc/fatzebra/
 app/design/frontend/base/default/layout/fatzebra.xml app/design/frontend/base/default/layout/fatzebra.xml
 app/design/frontend/base/default/template/mindarc/fatzebra/ app/design/frontend/base/default/template/mindarc/fatzebra/
-app/etc/modules/MindArc_FatZebra.xml app/etc/modules/MindArc_FatZebra.xml
+app/etc/modules/MindArc_Fatzebra.xml app/etc/modules/MindArc_Fatzebra.xml
 js/fatzebra/fatzebra.js js/fatzebra/fatzebra.js
 media/payments media/payments

@@ -28,7 +28,7 @@ Event.observe(window, "load", function () {
                 $('payment_form_fatzebra_entry').style.opacity = 1.0;
                 $$('#payment_form_fatzebra_entry input').each(function(item) {
                     item.enable();
-                    if (item.id !== "fatzebra_cc_save") 
+                    if (item.id !== "fatzebra_cc_save")
                         item.addClassName('required-entry');
                 });
                 $$('#payment_form_fatzebra_entry select').each(function(item) {
@@ -53,7 +53,7 @@ Event.observe(window, "load", function () {
             $('fatzebra_io_bb').disabled = false;
             $('fatzebra_cc_type').disabled = false;
         }
-        
+
         if ($('fz_directpost_enabled') && e.memo.method_code == 'fatzebra') {
             // Remove the 'name=' attr from the inputs so they aren't sent back to the server...
             $('fatzebra_cc_owner').removeAttribute('name');
@@ -67,45 +67,63 @@ Event.observe(window, "load", function () {
             }
 
             window.payment.save = function () {
-                // Embed these in the form
-                if($$('[name=use_saved_card]:checked').length > 0 && $$('[name=use_saved_card]:checked')[0].value == 1){
-                            originalPaymentSave.apply(window.payment);
-                            return;
-                }
-                var gwUrl = $('fz_directpost_url').value;
-                var nonce = $('fz_directpost_nonce').value;
-                var verification= $('fz_directpost_verification').value;
-                var v = function(name) { return $('fatzebra_' + name).value; };
-                
-                var req = new Ajax.JSONRequest(gwUrl, {
-                    parameters: {
-                        format: 'json',
-                        card_holder: v('cc_owner'),
-                        card_number: v('cc_number'),
-                        expiry_month: v('expiration'),
-                        expiry_year: v('expiration_yr'),
-                        cvv: v('cc_cid'),
-                        return_path: nonce,
-                        verification: verification
-                    },
-                    onSuccess: function (response) {
-                        if (response.responseJSON.r == 1) {
-                            var form = $('co-payment-form');
-                            form.insert(new Element('input', {type: 'hidden', name: 'payment[cc_number]', value: response.responseJSON.card_number}));
-                            form.insert(new Element('input', {type: 'hidden', name: 'payment[cc_owner]', value: response.responseJSON.card_holder}));
-                            form.insert(new Element('input', {type: 'hidden', name: 'payment[cc_token]', value: response.responseJSON.token}));
-                            $('fatzebra_cc_cid').setAttribute('name', 'payment[cc_cid]');
-                            originalPaymentSave.apply(window.payment);
-                        } else if (response.responseJSON.r == 97) {
-                            alert("Credit Card Validation Error - please check your card number and try again.");
-                        } else {
-                            alert("Sorry there has been an error attempting to validation your credit card details. Please try again.\n\nIf this error persists please contact the store owner.\n\nError Code: " + response.responseJSON.r);
-                        }
-                    },
-                    onFailure: function (response) {
-                        alert("Sorry there has been an error attempting to validation your credit card details. Please try again.\n\nIf this error persists please contact the store owner.");
+                if ($('p_method_fatzebra').checked) {  // FIXED: call these "hook" code only when FatZebra payment method is checked.
+                    // Embed these in the form
+                    if ($$('[name=use_saved_card]:checked').length > 0 && $$('[name=use_saved_card]:checked')[0].value == 1) {
+                        originalPaymentSave.apply(window.payment);
+                        return;
                     }
-                })
+                    var gwUrl = $('fz_directpost_url').value;
+                    var nonce = $('fz_directpost_nonce').value;
+                    var verification = $('fz_directpost_verification').value;
+                    var v = function (name) {
+                        return $('fatzebra_' + name).value;
+                    };
+
+                    var req = new Ajax.JSONRequest(gwUrl, {
+                        parameters: {
+                            format: 'json',
+                            card_holder: v('cc_owner'),
+                            card_number: v('cc_number'),
+                            expiry_month: v('expiration'),
+                            expiry_year: v('expiration_yr'),
+                            cvv: v('cc_cid'),
+                            return_path: nonce,
+                            verification: verification
+                        },
+                        onSuccess: function (response) {
+                            if (response.responseJSON.r == 1) {
+                                var form = $('co-payment-form');
+                                form.insert(new Element('input', {
+                                    type: 'hidden',
+                                    name: 'payment[cc_number]',
+                                    value: response.responseJSON.card_number
+                                }));
+                                form.insert(new Element('input', {
+                                    type: 'hidden',
+                                    name: 'payment[cc_owner]',
+                                    value: response.responseJSON.card_holder
+                                }));
+                                form.insert(new Element('input', {
+                                    type: 'hidden',
+                                    name: 'payment[cc_token]',
+                                    value: response.responseJSON.token
+                                }));
+                                $('fatzebra_cc_cid').setAttribute('name', 'payment[cc_cid]');
+                                originalPaymentSave.apply(window.payment);
+                            } else if (response.responseJSON.r == 97) {
+                                alert("Credit Card Validation Error - please check your card number and try again.");
+                            } else {
+                                alert("Sorry there has been an error attempting to validation your credit card details. Please try again.\n\nIf this error persists please contact the store owner.\n\nError Code: " + response.responseJSON.r);
+                            }
+                        },
+                        onFailure: function (response) {
+                            alert("Sorry there has been an error attempting to validation your credit card details. Please try again.\n\nIf this error persists please contact the store owner.");
+                        }
+                    })
+                } else {
+                    originalPaymentSave.apply(window.payment);
+                }
             }
 
             if (window.checkout && window.checkout.LightcheckoutSubmit) {
@@ -113,7 +131,7 @@ Event.observe(window, "load", function () {
                     originalLightcheckoutSubmit = window.checkout.LightcheckoutSubmit;
                     return function() {
                         // Embed these in the form
-                        
+
                         if($$('[name=use_saved_card]:checked').length > 0 && $$('[name=use_saved_card]:checked')[0].value == 1){
                                     originalLightcheckoutSubmit.apply(window.checkout);
                                     return;
@@ -122,7 +140,7 @@ Event.observe(window, "load", function () {
                         var nonce = $('fz_directpost_nonce').value;
                         var verification= $('fz_directpost_verification').value;
                         var v = function(name) { return $('fatzebra_' + name).value; };
-                        
+
                         var req = new Ajax.JSONRequest(gwUrl, {
                             parameters: {
                                 format: 'json',

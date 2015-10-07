@@ -168,7 +168,7 @@ class MindArc_FatZebra_Model_Payment extends Mage_Payment_Model_Method_Cc
             "amount" => (int)$amt,
             "reference" => $payment->getRefundTransactionId());
 
-        return $this->_post("refunds", $payload);
+        return $this->_post("refunds", $payload, $payment->getOrder()->getStoreId());
     }
 
     /**
@@ -326,7 +326,7 @@ class MindArc_FatZebra_Model_Payment extends Mage_Payment_Model_Method_Cc
         try {
             $this->fzlog("{$reference}: Submitting payment for {$payload["reference"]}.");
              
-            $response = $this->_post("purchases", $payload);
+            $response = $this->_post("purchases", $payload, $payment->getOrder()->getStoreId());
         } catch (Exception $e) {
             $exMessage = $e->getMessage();
             $this->fzlog("{$reference}: Payment request failed ({$exMessage}) - querying payment from Fat Zebra", Zend_Log::WARN);
@@ -392,17 +392,17 @@ class MindArc_FatZebra_Model_Payment extends Mage_Payment_Model_Method_Cc
      *
      * @return StdObject response
      */
-    private function _post($path, $payload)
+    private function _post($path, $payload, $store_id)
     {
-        return $this->_request($path, Zend_Http_Client::POST, $payload);
+        return $this->_request($path, Zend_Http_Client::POST, $payload, $store_id);
     }
 
-    private function _request($path, $method = Zend_Http_Client::GET, $payload = null)
+    private function _request($path, $method = Zend_Http_Client::GET, $payload = null, $store_id)
     {
-        $username = Mage::getStoreConfig('payment/fatzebra/username');
-        $token = Mage::getStoreConfig('payment/fatzebra/token');
-        $sandbox = (boolean)Mage::getStoreConfig('payment/fatzebra/sandbox');
-        $testmode = (boolean)Mage::getStoreConfig('payment/fatzebra/testmode');
+        $username = Mage::getStoreConfig('payment/fatzebra/username', $store_id);
+        $token = Mage::getStoreConfig('payment/fatzebra/token', $store_id);
+        $sandbox = (boolean)Mage::getStoreConfig('payment/fatzebra/sandbox', $store_id);
+        $testmode = (boolean)Mage::getStoreConfig('payment/fatzebra/testmode', $store_id);
 
         $url = $sandbox ? "https://gateway.sandbox.fatzebra.com.au" : "https://gateway.fatzebra.com.au";
 

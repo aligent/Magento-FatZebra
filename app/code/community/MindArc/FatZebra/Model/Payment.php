@@ -414,6 +414,7 @@ class MindArc_FatZebra_Model_Payment extends Mage_Payment_Model_Method_Cc
         $client->setUri($uri);
         $client->setAuth($username, $token);
         $client->setMethod($method);
+//        $client->setAdapter('MindArc_FatZebra_Model_Zend_Http_Response');
         if ($method == Zend_Http_Client::POST) {
             $client->setRawData(json_encode($payload));
         }
@@ -431,7 +432,7 @@ class MindArc_FatZebra_Model_Payment extends Mage_Payment_Model_Method_Cc
             Mage::throwException(Mage::helper('fatzebra')->__("Gateway Error: %s", $e->getMessage()));
         }
 
-        $responseBody = $response->getBody();
+        $responseBody = Mage::helper('fatzebra/response')->getChunkBody($response);
         $response = json_decode($responseBody);
         if (is_null($response)) {
             $response = array("successful" => false,

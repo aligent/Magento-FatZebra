@@ -112,11 +112,21 @@ class MindArc_FatZebra_Model_Payment extends Mage_Payment_Model_Method_Cc
                     $payment->setLastTransId($result->response->id);
                     $payment->setTransactionId($result->response->id);
                     $invoice = $order->getInvoiceCollection()->getFirstItem();
-                    if ($invoice && !$invoice->getEmailSent()) {
+                    if ($invoice) {
                         $invoice->pay(); // Mark the invoice as paid
                         $invoice->addComment("Payment made by Credit Card. Reference " . $result->response->id . ", Masked number: " . $result->response->card_number, false, true);
-                        $invoice->sendEmail();
-                        $invoice->save();
+                        /**
+                         * Module did not work correctly with multi-shipping
+                         * saving invoice caused issues because entities were not populated at this point
+                         * causing save to throw error.
+                         * FatZebra support suggest to comment following two lines
+                         * One for sending email other for saving invoice
+                         * Tested in local and it was sending order/invoice emails correctly
+                         * and orders appeared correctly in admin after comment
+                         */
+                        //commented these two lines based on FatZebra Support
+//                        $invoice->sendEmail();
+//                        $invoice->save();
                     }
                 }
             } else {
